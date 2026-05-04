@@ -38,21 +38,21 @@
     /* ── Design System Tokens (Checkar UI Kit) ────── */
     :root {
       /* Brand Blues */
-      --c-blue-logo:    #1790fa;
-      --c-blue-primary: #1187e6;
-      --c-blue-rich:    #1b7fe6;
-      --c-blue-deep:    #0a66b9;
-      --c-blue-nav:     #0078f8;
-      --c-blue-dark:    #0c4a84;
-      --c-blue-ink:     #0e4475;
-      --c-blue-muted:   #0f7fdd;
+      --c-blue-logo:    #2f7fc1;
+      --c-blue-primary: #256aa3;
+      --c-blue-rich:    #1f5c8d;
+      --c-blue-deep:    #174a73;
+      --c-blue-nav:     #2c6ea3;
+      --c-blue-dark:    #102f49;
+      --c-blue-ink:     #123854;
+      --c-blue-muted:   #2e79b5;
       /* Accent Blues */
-      --c-blue-lt:      #4da6ff;
-      --c-blue-sky:     #66b8ff;
-      --c-cyan:         #00d4ff;
-      --c-cyan-lt:      #8fceff;
-      --c-blue-light2:  #c7ebff;
-      --c-blue-subtle:  #d9efff;
+      --c-blue-lt:      #6aa9dd;
+      --c-blue-sky:     #8cc4ec;
+      --c-cyan:         #5fc7e8;
+      --c-cyan-lt:      #b8def2;
+      --c-blue-light2:  #d5e8f3;
+      --c-blue-subtle:  #e3f0f7;
       /* Neutrals */
       --c-white:        #ffffff;
       --c-bg-dark:      #020810;
@@ -66,9 +66,9 @@
       --border-nav:         rgba(173,226,255,.34);
       --border-divider:     rgba(255,255,255,.1);
       /* Gradients */
-      --grad-hero:       linear-gradient(165deg, #0d7fdf 0%, #1187e6 45%, #0a66b9 100%);
+      --grad-hero:       linear-gradient(165deg, #16324a 0%, #1f567d 45%, #12324d 100%);
       --grad-blue-cyan:  linear-gradient(135deg, var(--c-blue-primary), var(--c-cyan));
-      --grad-card-hover: linear-gradient(150deg, #0f7cd8 0%, #0a63b4 58%, #084f92 100%);
+      --grad-card-hover: linear-gradient(150deg, #245c88 0%, #1b4c73 58%, #143a59 100%);
       --grad-stat:       linear-gradient(135deg, #ffffff, #d9efff);
       --grad-wa:         linear-gradient(135deg, #25d366, #128c7e);
       --grad-white-btn:  linear-gradient(135deg, #ffffff, #e9f6ff);
@@ -91,8 +91,8 @@
     body {
       font-family: 'Nunito Sans', system-ui, sans-serif;
       background:
-        radial-gradient(circle at 15% 12%, rgba(255,255,255,.18) 0%, transparent 28%),
-        radial-gradient(circle at 85%  3%, rgba(255,255,255,.12) 0%, transparent 24%),
+        radial-gradient(circle at 15% 12%, rgba(255,255,255,.11) 0%, transparent 28%),
+        radial-gradient(circle at 85%  3%, rgba(255,255,255,.08) 0%, transparent 24%),
         var(--grad-hero);
       background-attachment: fixed;
       color: var(--c-white);
@@ -165,12 +165,44 @@
     }
 
     /* Scroll reveal */
-    [data-r] { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
-    [data-r].on { opacity: 1; transform: none; }
+    [data-r] {
+      opacity: 0;
+      transform: translate3d(0, 24px, 0) scale(.975);
+      filter: blur(10px);
+      transition:
+        opacity .82s ease,
+        transform .9s cubic-bezier(.22,.61,.36,1),
+        filter .82s ease;
+      will-change: opacity, transform, filter;
+    }
+    [data-r].on {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
     [data-r][data-d="1"] { transition-delay: .08s; }
     [data-r][data-d="2"] { transition-delay: .16s; }
     [data-r][data-d="3"] { transition-delay: .24s; }
     [data-r][data-d="4"] { transition-delay: .32s; }
+
+    .guide-grid > [data-r]:nth-child(odd),
+    .trust-grid > [data-r]:nth-child(odd),
+    .faq-grid > [data-r]:nth-child(odd) {
+      transform: translate3d(-14px, 24px, 0) scale(.975);
+    }
+    .guide-grid > [data-r]:nth-child(even),
+    .trust-grid > [data-r]:nth-child(even),
+    .faq-grid > [data-r]:nth-child(even) {
+      transform: translate3d(14px, 24px, 0) scale(.975);
+    }
+    .vehicle-grid > [data-r] {
+      transform: translate3d(0, 28px, 0) scale(.975);
+    }
+    .guide-header [data-r],
+    .vehicle-header [data-r],
+    .faq-header [data-r] {
+      transform: translate3d(0, 26px, 0) scale(.985);
+    }
 
     section + section { border-top: 1px solid var(--border-divider); }
 
@@ -179,13 +211,13 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       height: 100px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
       padding: 0 clamp(20px, 6vw, 60px);
-      background: linear-gradient(135deg, rgba(23,144,250,.95) 0%, rgba(0,120,248,.93) 100%);
+      background: linear-gradient(135deg, rgba(36,92,136,.95) 0%, rgba(27,76,115,.93) 100%);
       backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
       border-bottom: 1px solid rgba(255,255,255,.1);
       box-shadow: 0 8px 32px rgba(6,47,84,.15);
       transition: background .3s, box-shadow .3s;
     }
-    .nav.solid { background: linear-gradient(135deg, rgba(23,144,250,.98) 0%, rgba(0,120,248,.97) 100%); box-shadow: 0 12px 40px rgba(6,47,84,.25); }
+    .nav.solid { background: linear-gradient(135deg, rgba(36,92,136,.98) 0%, rgba(27,76,115,.97) 100%); box-shadow: 0 12px 40px rgba(6,47,84,.25); }
 
     .nav-logo { display: inline-flex; align-items: center; flex-shrink: 0; transition: transform .3s cubic-bezier(.34,1.56,.64,1), filter .3s; }
     .nav-logo:hover { transform: scale(1.05); filter: brightness(1.1); }
@@ -236,12 +268,42 @@
     #stage-bg {
       position: absolute; inset: 0; z-index: 0;
       background: #000;
-      transition: background .4s linear;
+      transition: background .85s cubic-bezier(.22,.61,.36,1), filter .85s ease;
+      overflow: hidden;
+    }
+
+    #stage-bg::before,
+    #stage-bg::after {
+      content: '';
+      position: absolute; inset: -12%;
+      pointer-events: none;
+    }
+
+    #stage-bg::before {
+      background:
+        radial-gradient(circle at 22% 24%, rgba(151,203,255,.16) 0%, transparent 30%),
+        radial-gradient(circle at 78% 20%, rgba(87,158,219,.14) 0%, transparent 28%),
+        radial-gradient(circle at 52% 78%, rgba(255,255,255,.06) 0%, transparent 34%);
+      mix-blend-mode: screen;
+      opacity: .8;
+      animation: luxeDrift 16s ease-in-out infinite alternate;
+    }
+
+    #stage-bg::after {
+      background:
+        linear-gradient(125deg, rgba(255,255,255,.02) 0%, rgba(255,255,255,.12) 24%, rgba(255,255,255,.02) 44%, transparent 56%),
+        radial-gradient(circle at 50% 50%, transparent 44%, rgba(3,10,18,.20) 100%);
+      opacity: .55;
+      animation: luxeSheen 18s ease-in-out infinite;
     }
 
     .stage-glow {
       position: absolute; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(27,127,230,.13) 0%, transparent 70%);
+      background:
+        radial-gradient(ellipse 52% 48% at 50% 50%, rgba(138,192,240,.16) 0%, rgba(138,192,240,.08) 34%, transparent 72%),
+        radial-gradient(ellipse 68% 60% at 50% 56%, rgba(255,255,255,.07) 0%, transparent 74%);
+      opacity: .9;
+      transition: opacity .85s ease, filter .85s ease, transform .85s ease;
     }
 
     #car-canvas {
@@ -363,7 +425,7 @@
     .stat-item.counted { opacity: 1; transform: none; }
 
     /* ── Cards (shared tilt + holo) ──────────────── */
-    .svc-card, .ben, .step-card, .info-card {
+    .svc-card, .ben, .step-card, .info-card, .guide-card, .vehicle-card, .trust-card {
       position: relative; overflow: hidden; isolation: isolate;
       border: 1px solid var(--border-card);
       background: linear-gradient(160deg, rgba(255,255,255,.96), rgba(236,247,255,.9));
@@ -373,26 +435,26 @@
       transform: perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(0);
       transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease, border-color .3s, background .3s;
     }
-    .svc-card::before, .ben::before, .step-card::before, .info-card::before {
+    .svc-card::before, .ben::before, .step-card::before, .info-card::before, .guide-card::before, .vehicle-card::before, .trust-card::before {
       content: ''; position: absolute; inset: -35%;
       background: radial-gradient(200px 140px at var(--mx,50%) var(--my,50%), rgba(64,187,255,.2) 0%, rgba(64,187,255,.08) 35%, transparent 75%);
       opacity: .85; z-index: -1; transition: opacity .3s; pointer-events: none;
     }
-    .svc-card::after, .ben::after, .step-card::after, .info-card::after {
+    .svc-card::after, .ben::after, .step-card::after, .info-card::after, .guide-card::after, .vehicle-card::after, .trust-card::after {
       content: ''; position: absolute; top: 0; left: -150%; width: 70%; height: 100%;
       transform: skewX(-18deg);
       background: linear-gradient(to right, transparent, rgba(255,255,255,.72), transparent);
       opacity: .45; pointer-events: none;
     }
-    .svc-card:hover, .ben:hover, .step-card:hover, .info-card:hover {
+    .svc-card:hover, .ben:hover, .step-card:hover, .info-card:hover, .guide-card:hover, .vehicle-card:hover, .trust-card:hover {
       border-color: var(--border-card-hover);
       box-shadow: 0 24px 54px rgba(7,44,78,.26), inset 0 0 0 1px rgba(92,194,255,.22), 0 0 28px rgba(24,159,244,.18);
       transform: perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-8px);
     }
-    .svc-card:hover::after, .ben:hover::after, .step-card:hover::after, .info-card:hover::after {
+    .svc-card:hover::after, .ben:hover::after, .step-card:hover::after, .info-card:hover::after, .guide-card:hover::after, .vehicle-card:hover::after, .trust-card:hover::after {
       animation: holoSweep 1.05s cubic-bezier(.23,1,.32,1) 1;
     }
-    .svc-card > *, .ben > *, .step-card > *, .info-card > * { position: relative; z-index: 2; transform: translateZ(14px); }
+    .svc-card > *, .ben > *, .step-card > *, .info-card > *, .guide-card > *, .vehicle-card > *, .trust-card > * { position: relative; z-index: 2; transform: translateZ(14px); }
     .svc-icon, .ben-ic, .info-ic, .step-num { box-shadow: 0 10px 24px rgba(9,71,123,.15), inset 0 0 0 1px rgba(255,255,255,.55); }
 
     /* ── Services ────────────────────────────────── */
@@ -523,6 +585,194 @@
     }
     .step-t { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 800; margin-bottom: 14px; color: var(--c-white); letter-spacing: -.4px; }
     .step-d { font-size: 15px; color: rgba(255,255,255,.78); line-height: 1.75; font-weight: 500; }
+
+    /* â”€â”€ Guide / FAQ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+    #guia, #vehiculos, #faq { padding: 140px 0; }
+    .guide-header, .vehicle-header, .faq-header { text-align: center; margin-bottom: 72px; }
+    .guide-header .sec-lead, .vehicle-header .sec-lead, .faq-header .sec-lead { max-width: 760px; margin: 0 auto; }
+
+    .guide-grid, .vehicle-grid, .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+      align-items: stretch;
+    }
+    .guide-card, .vehicle-card, .trust-card {
+      padding: 32px 30px;
+      border-radius: 20px;
+      height: 100%;
+      position: relative;
+      z-index: 0;
+    }
+    .guide-card, .trust-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--c-white);
+      box-shadow: 0 22px 48px rgba(4,23,40,.18);
+    }
+    .guide-kicker, .vehicle-kicker, .trust-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--c-blue-light2);
+    }
+    .guide-kicker::before, .vehicle-kicker::before, .trust-kicker::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--c-blue-primary), var(--c-cyan));
+      box-shadow: 0 0 0 6px rgba(95,199,232,.10);
+    }
+    .guide-card h3, .vehicle-card h3, .trust-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -.8px;
+      color: var(--c-blue-ink);
+      margin-bottom: 12px;
+    }
+    .guide-card p, .vehicle-card p, .trust-card p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(14,68,117,.82);
+      font-weight: 600;
+    }
+    .guide-list, .vehicle-list, .trust-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .guide-list li, .vehicle-list li, .trust-list li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--c-blue-ink);
+      font-weight: 600;
+    }
+    .guide-list li::before, .vehicle-list li::before, .trust-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .6em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-blue-primary);
+    }
+    .guide-card h3,
+    .guide-card p,
+    .guide-card .guide-list li,
+    .trust-card h3,
+    .trust-card p,
+    .trust-card .trust-list li { color: var(--c-white); }
+    .guide-card .guide-list li::before,
+    .trust-card .trust-list li::before { background: var(--c-cyan); }
+    .guide-note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(95,199,232,.13), rgba(255,255,255,.06));
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      line-height: 1.65;
+      font-weight: 700;
+      border: 1px solid rgba(173,226,255,.18);
+    }
+
+    .vehicle-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .vehicle-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--c-white);
+      box-shadow: 0 22px 48px rgba(4,23,40,.18);
+    }
+    .vehicle-card h3,
+    .vehicle-card p,
+    .vehicle-card .vehicle-list li { color: var(--c-white); }
+    .vehicle-card .vehicle-list li::before { background: var(--c-cyan); }
+    .vehicle-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .vehicle-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.84);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 28px;
+      align-items: start;
+    }
+    .faq-item {
+      border-radius: 18px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      overflow: hidden;
+      box-shadow: 0 20px 44px rgba(4,23,40,.14);
+      position: relative;
+      z-index: 0;
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 24px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.35;
+      color: var(--c-white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+';
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,.84);
+    }
+    .faq-item[open] summary::after { content: '-'; }
+    .faq-body {
+      padding: 0 24px 24px;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+      line-height: 1.75;
+      font-weight: 600;
+    }
+    .faq-body strong { color: var(--c-white); }
+    .trust-grid { margin-top: 24px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
     /* ── Contact ─────────────────────────────────── */
     #contacto { padding: 140px 0; }
@@ -727,17 +977,30 @@
       50% { transform: translateY(4px); opacity: 1; }
     }
 
+    @keyframes luxeDrift {
+      0%   { transform: translate3d(-2%, -1%, 0) scale(1); }
+      50%  { transform: translate3d(2%, 1.5%, 0) scale(1.04); }
+      100% { transform: translate3d(-1%, 3%, 0) scale(1.02); }
+    }
+
+    @keyframes luxeSheen {
+      0%, 100% { transform: translateX(-4%) scale(1.02); opacity: .42; }
+      50%      { transform: translateX(4%) scale(1.06); opacity: .68; }
+    }
+
     /* ── Responsive ──────────────────────────────── */
     @media (max-width: 1024px) {
       .why-grid     { grid-template-columns: 1fr; gap: 48px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .vehicle-grid, .trust-grid { grid-template-columns: 1fr 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 768px) {
       .nav { height: 95px; gap: 16px; padding: 0 clamp(16px, 5vw, 24px); }
       #stage { height: 380vh; }
-      #servicios, #por-que, #proceso, #contacto { padding: 60px 0; }
+      #servicios, #por-que, #proceso, #guia, #vehiculos, #faq, #contacto { padding: 60px 0; }
       footer { padding: 44px 5% 28px; }
       .nav-links, .nav-wa { display: none; }
       .nav-burger { display: flex; }
@@ -798,6 +1061,12 @@
       .form-row { grid-template-columns: 1fr; }
       .proc-grid { grid-template-columns: 1fr; }
       .proc-connector { display: none; }
+      .guide-header, .vehicle-header, .faq-header { margin-bottom: 36px; }
+      .guide-grid, .vehicle-grid, .trust-grid, .faq-grid { grid-template-columns: 1fr; gap: 14px; }
+      .guide-card, .vehicle-card, .trust-card { padding: 24px 20px; }
+      .guide-card h3, .vehicle-card h3, .trust-card h3 { font-size: 20px; }
+      .faq-item summary { padding: 18px 18px; font-size: 15px; }
+      .faq-body { padding: 0 18px 18px; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
       .ft-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -809,8 +1078,8 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .svc-card, .ben, .step-card, .info-card { transition: none; transform: none !important; }
-      .svc-card::after, .ben::after, .step-card::after, .info-card::after { animation: none !important; }
+      .svc-card, .ben, .step-card, .info-card, .guide-card, .vehicle-card, .trust-card { transition: none; transform: none !important; }
+      .svc-card::after, .ben::after, .step-card::after, .info-card::after, .guide-card::after, .vehicle-card::after, .trust-card::after { animation: none !important; }
       [data-r] { opacity: 1; transform: none; transition: none; }
       .dot-live, #car-canvas { animation: none; }
     }
@@ -829,7 +1098,7 @@
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="https://wa.me/573183586103?text=Hola%2C%20quiero%20agendar%20mi%20revisi%C3%B3n%20en%20Checkar." target="_blank" rel="noopener" class="nav-wa">
+  <a href="#appt-form" class="nav-wa">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Agendar revisión
   </a>
@@ -845,7 +1114,7 @@
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="https://wa.me/573183586103?text=Hola%2C%20quiero%20agendar%20mi%20revisi%C3%B3n%20en%20Checkar." target="_blank" rel="noopener" class="nav-drawer-wa">
+  <a href="#appt-form" class="nav-drawer-wa">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     Agendar por WhatsApp
   </a>
@@ -867,7 +1136,7 @@
       <h1 class="ph1-title">Tu revisión técnica,<br>lista hoy</h1>
       <p class="ph1-sub">RTM · SOAT · Diagnóstico OBD2 en Riohacha<br>Agenda en segundos — resultado al instante</p>
       <div class="ph1-ctas">
-        <a href="https://wa.me/573183586103?text=Hola%2C%20quiero%20agendar%20mi%20revisi%C3%B3n%20en%20Checkar." target="_blank" rel="noopener" class="btn-wa">
+        <a href="#appt-form" class="btn-wa">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           Agendar por WhatsApp
         </a>
@@ -1012,6 +1281,169 @@
 </section>
 
 <!-- ───────────────────────── CONTACT ───────────────────────── -->
+<section id="guia">
+  <div class="container">
+    <div class="guide-header">
+      <div class="sec-label" data-r>Antes de venir</div>
+      <h2 class="sec-h2" data-r data-d="1">Todo lo que necesitas saber antes de tu RTM</h2>
+      <p class="sec-lead" data-r data-d="2">Reunimos la informacion mas importante para que llegues preparado, evites contratiempos y entiendas como funciona un Centro de Diagnostico Automotor.</p>
+    </div>
+
+    <div class="guide-grid">
+      <article class="guide-card" data-r>
+        <div class="guide-kicker">Que es un CDA</div>
+        <h3>Un Centro de Diagnostico Automotor verifica seguridad y emisiones</h3>
+        <p>Un CDA realiza la revision tecnico-mecanica y de emisiones contaminantes para comprobar que el vehiculo pueda circular en condiciones seguras y dentro de la normativa ambiental colombiana.</p>
+        <ul class="guide-list">
+          <li>Evalua condiciones mecanicas, ambientales y de seguridad vial.</li>
+          <li>La revision no equivale a mantenimiento ni reparacion del vehiculo.</li>
+          <li>El resultado depende del estado real del automotor al momento de la inspeccion.</li>
+        </ul>
+      </article>
+
+      <article class="guide-card" data-r data-d="1">
+        <div class="guide-kicker">Cuando te toca</div>
+        <h3>La primera RTM para particulares es a partir del quinto ano</h3>
+        <p>Los vehiculos particulares nuevos presentan su primera revision tecnico-mecanica a partir del quinto ano desde la fecha de matricula. Motos y vehiculos de servicio publico la presentan al cumplir dos anos.</p>
+        <div class="guide-note">Despues de la primera revision, la RTM debe realizarse periodicamente antes del vencimiento del certificado vigente.</div>
+      </article>
+
+      <article class="guide-card" data-r data-d="2">
+        <div class="guide-kicker">Documentos</div>
+        <h3>Llega con los soportes correctos y evita demoras</h3>
+        <p>Tener los documentos listos acelera el proceso de recepcion y validacion antes de ingresar a la inspeccion.</p>
+        <ul class="guide-list">
+          <li>Licencia de transito o tarjeta de propiedad.</li>
+          <li>SOAT vigente.</li>
+          <li>Certificado de gas vigente, cuando aplique.</li>
+          <li>Documento del propietario o conductor autorizado si se requiere validacion.</li>
+        </ul>
+      </article>
+
+      <article class="guide-card" data-r data-d="3">
+        <div class="guide-kicker">Si no aprueba</div>
+        <h3>Recibes un informe y cuentas con plazo para reinspeccion</h3>
+        <p>Si el vehiculo no aprueba, se entrega el detalle de las fallas encontradas para que puedas corregirlas y volver con mas claridad sobre lo que debe mejorarse.</p>
+        <ul class="guide-list">
+          <li>La reinspeccion suele contemplarse dentro de un plazo de 15 dias calendario.</li>
+          <li>Se revisan nuevamente los puntos observados o rechazados.</li>
+          <li>Si el vehiculo presenta cambios adicionales, puede requerir una revision completa segun el caso.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="trust-grid">
+      <article class="trust-card" data-r>
+        <div class="trust-kicker">Proceso real</div>
+        <h3>Recepcion, validacion e inspeccion</h3>
+        <p>Al llegar se validan documentos, se orienta el ingreso del vehiculo y luego continua la revision segun el servicio solicitado.</p>
+      </article>
+      <article class="trust-card" data-r data-d="1">
+        <div class="trust-kicker">Duracion estimada</div>
+        <h3>Entre 30 y 45 minutos en condiciones normales</h3>
+        <p>El tiempo puede variar segun el tipo de vehiculo, la demanda del momento y si hace falta validacion documental adicional.</p>
+      </article>
+      <article class="trust-card" data-r data-d="2">
+        <div class="trust-kicker">Atencion</div>
+        <h3>Agenda previa y confirmacion por WhatsApp</h3>
+        <p>La landing esta planteada para convertir desde WhatsApp, por eso pedimos tus datos antes de abrir la conversacion y asi agilizar la confirmacion.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ VEHICLES / INSPECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+<section id="vehiculos">
+  <div class="container">
+    <div class="vehicle-header">
+      <div class="sec-label" data-r>Que se revisa</div>
+      <h2 class="sec-h2" data-r data-d="1">Aspectos criticos que suelen definir el resultado</h2>
+      <p class="sec-lead" data-r data-d="2">Estos son algunos de los sistemas y hallazgos que suelen ser decisivos en una revision tecnico-mecanica y de emisiones.</p>
+    </div>
+
+    <div class="vehicle-grid">
+      <article class="vehicle-card" data-r>
+        <div class="vehicle-kicker">Seguridad vial</div>
+        <h3>Componentes mecanicos y operativos</h3>
+        <p>La revision busca confirmar que el vehiculo responda de forma segura en condiciones reales de circulacion.</p>
+        <ul class="vehicle-list">
+          <li>Frenos, suspension, direccion y alineacion general.</li>
+          <li>Luces, senalizacion, limpiaparabrisas y estado visual.</li>
+          <li>Llantas, vidrios y elementos visibles de seguridad.</li>
+        </ul>
+      </article>
+
+      <article class="vehicle-card" data-r data-d="1">
+        <div class="vehicle-kicker">Emisiones</div>
+        <h3>Control ambiental y gases contaminantes</h3>
+        <p>El comportamiento del motor tambien influye en el resultado, especialmente en vehiculos con fallas de combustion o mantenimiento atrasado.</p>
+        <div class="vehicle-chip-row">
+          <span class="vehicle-chip">Gases</span>
+          <span class="vehicle-chip">Sincronizacion</span>
+          <span class="vehicle-chip">Fugas</span>
+          <span class="vehicle-chip">OBD2</span>
+        </div>
+      </article>
+
+      <article class="vehicle-card" data-r data-d="2">
+        <div class="vehicle-kicker">Motivos comunes</div>
+        <h3>Hallazgos que suelen llevar a rechazo</h3>
+        <p>Las causas frecuentes incluyen defectos que afectan visibilidad, frenado, estabilidad o emisiones.</p>
+        <ul class="vehicle-list">
+          <li>Llantas lisas o en mal estado.</li>
+          <li>Fugas de aceite u otros fluidos.</li>
+          <li>Luces defectuosas y vidrios fisurados.</li>
+          <li>Niveles de emisiones por fuera del rango permitido.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ FAQ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="sec-label" data-r>Preguntas frecuentes</div>
+      <h2 class="sec-h2" data-r data-d="1">Respuestas directas antes de escribirnos</h2>
+      <p class="sec-lead" data-r data-d="2">Si vienes por tu RTM, SOAT o diagnostico, estas son las dudas que mas suelen aparecer antes de agendar.</p>
+    </div>
+
+    <div class="faq-grid">
+      <details class="faq-item" data-r>
+        <summary>Cuanto dura una revision tecnico-mecanica?</summary>
+        <div class="faq-body">En condiciones normales puede tomar entre <strong>30 y 45 minutos</strong>, aunque el tiempo real depende del tipo de vehiculo, la fila operativa y la validacion inicial de documentos.</div>
+      </details>
+
+      <details class="faq-item" data-r data-d="1">
+        <summary>Que documentos debo llevar?</summary>
+        <div class="faq-body">Lo recomendable es llegar con <strong>tarjeta de propiedad, SOAT vigente</strong> y, si aplica, <strong>certificado de gas</strong>. Eso reduce retrasos al inicio del proceso.</div>
+      </details>
+
+      <details class="faq-item" data-r data-d="2">
+        <summary>Si voy al CDA mi vehiculo aprueba automaticamente?</summary>
+        <div class="faq-body">No. El resultado depende del estado del vehiculo al momento de la inspeccion. La revision valida condiciones mecanicas, de seguridad y emisiones; no garantiza aprobacion por el simple ingreso.</div>
+      </details>
+
+      <details class="faq-item" data-r data-d="3">
+        <summary>Que pasa si no aprueba?</summary>
+        <div class="faq-body">Se informa que puntos deben corregirse y normalmente cuentas con un plazo de <strong>15 dias calendario</strong> para regresar a reinspeccion sobre los hallazgos reportados.</div>
+      </details>
+
+      <details class="faq-item" data-r>
+        <summary>Cuando debo hacer la primera RTM?</summary>
+        <div class="faq-body">Para vehiculos particulares nuevos, a partir del <strong>quinto ano</strong> contado desde la matricula. Para <strong>motos y servicio publico</strong>, al cumplir <strong>dos anos</strong>.</div>
+      </details>
+
+      <details class="faq-item" data-r data-d="1">
+        <summary>Puedo agendar por WhatsApp?</summary>
+        <div class="faq-body">Si. La landing esta pensada para iniciar la conversacion con tus datos basicos y el tipo de servicio, de modo que la confirmacion sea mas rapida y clara.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ CONTACT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
 <section id="contacto">
   <div class="container">
     <div style="margin-bottom:32px">
@@ -1046,7 +1478,18 @@
           <div class="form-row">
             <div class="form-field">
               <label for="f-name">Nombre</label>
-              <input id="f-name" type="text" placeholder="Tu nombre completo" autocomplete="name" required>
+              <input id="f-name" type="text" placeholder="Tu nombre" autocomplete="given-name" required>
+            </div>
+            <div class="form-field">
+              <label for="f-lastname">Apellido</label>
+              <input id="f-lastname" type="text" placeholder="Tu apellido" autocomplete="family-name" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="f-id">Cedula</label>
+              <input id="f-id" type="text" placeholder="Tu numero de cedula" inputmode="numeric" autocomplete="off" required>
             </div>
             <div class="form-field">
               <label for="f-phone">Teléfono</label>
@@ -1154,9 +1597,9 @@ if (burger && drawer) {
 /* ── CANVAS SCROLL ANIMATION ─────────────────────────────────── */
 const TOTAL = 117;
 
-const BG1 = 'linear-gradient(165deg,#0d7fdf 0%,#1187e6 45%,#0a66b9 100%)';
-const BG2 = 'linear-gradient(165deg,#06203b 0%,#0b2748 46%,#051221 100%)';
-const BG3 = 'linear-gradient(165deg,#0a66b9 0%,#0f7fdd 45%,#19a0ff 100%)';
+const BG1 = 'radial-gradient(circle at 50% 38%, rgba(118,170,220,.16) 0%, transparent 28%), linear-gradient(165deg,#1a344a 0%,#234968 44%,#13273a 100%)';
+const BG2 = 'radial-gradient(circle at 52% 40%, rgba(114,165,215,.10) 0%, transparent 30%), linear-gradient(165deg,#0d1621 0%,#152636 46%,#0b141d 100%)';
+const BG3 = 'radial-gradient(circle at 48% 34%, rgba(140,188,232,.14) 0%, transparent 26%), linear-gradient(165deg,#203d56 0%,#2a5878 45%,#162d43 100%)';
 
 const canvas  = document.getElementById('car-canvas');
 const ctx     = canvas.getContext('2d');
@@ -1164,6 +1607,7 @@ const imgs    = new Array(TOTAL).fill(null);
 
 const stageEl  = document.getElementById('stage');
 const stageBg  = document.getElementById('stage-bg');
+const stageGlow = document.getElementById('stage-glow');
 const ph1El    = document.getElementById('ph1');
 const ph2El    = document.getElementById('ph2');
 const ph3El    = document.getElementById('ph3');
@@ -1234,6 +1678,10 @@ function updateScene(p) {
   applyPhase(ph3El, c01(fadeWindow(p, 0.60, 0.72, 0.96, 1.05)));
 
   stageBg.style.background = p < 0.25 ? BG1 : p < 0.55 ? BG2 : BG3;
+  stageBg.style.filter = `saturate(${0.94 + p * 0.1}) brightness(${0.94 + p * 0.08})`;
+  stageGlow.style.opacity = (0.72 + (1 - Math.abs(p - 0.5) * 1.15) * 0.22).toFixed(3);
+  stageGlow.style.filter = p < 0.55 ? 'blur(0px)' : 'blur(2px)';
+  stageGlow.style.transform = `scale(${1 + p * 0.035})`;
   hintEl.classList.toggle('fade', p > 0.04);
 }
 
@@ -1282,7 +1730,7 @@ resizeCanvas();
 updateScene(0);
 
 /* ── 3D CARD TILT ─────────────────────────────────────────────── */
-document.querySelectorAll('.svc-card, .ben, .step-card, .info-card').forEach(card => {
+document.querySelectorAll('.svc-card, .ben, .step-card, .info-card, .guide-card, .vehicle-card, .trust-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
     const rx = ((e.clientY - rect.top  - rect.height / 2) / (rect.height / 2)) * -6;
@@ -1302,11 +1750,14 @@ document.querySelectorAll('.svc-card, .ben, .step-card, .info-card').forEach(car
 const apptForm = document.getElementById('appt-form');
 const formStatus = document.getElementById('form-status');
 const nameField = document.getElementById('f-name');
+const lastNameField = document.getElementById('f-lastname');
+const idField = document.getElementById('f-id');
 const phoneField = document.getElementById('f-phone');
 const serviceField = document.getElementById('f-service');
 const dateField = document.getElementById('f-date');
 
-dateField.min = new Date().toISOString().slice(0, 10);
+const localToday = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+dateField.min = localToday;
 
 function setFormStatus(message, state = '') {
   formStatus.textContent = message;
@@ -1321,7 +1772,7 @@ function clearInvalidState(field) {
   field.classList.remove('is-invalid');
 }
 
-[nameField, phoneField, serviceField].forEach(field => {
+[nameField, lastNameField, idField, phoneField, serviceField].forEach(field => {
   field.addEventListener('input', () => {
     clearInvalidState(field);
     if (formStatus.dataset.state === 'error') setFormStatus('');
@@ -1335,33 +1786,39 @@ function clearInvalidState(field) {
 apptForm.addEventListener('submit', event => {
   event.preventDefault();
   const name = nameField.value.trim();
+  const lastName = lastNameField.value.trim();
+  const idNumber = idField.value.trim();
   const phone = phoneField.value.trim();
   const service = serviceField.value;
   const date = dateField.value;
+  const idDigits = idNumber.replace(/\D/g, '');
   const phoneDigits = phone.replace(/\D/g, '');
   const invalidFields = [];
 
-  [nameField, phoneField, serviceField].forEach(clearInvalidState);
+  [nameField, lastNameField, idField, phoneField, serviceField].forEach(clearInvalidState);
 
   if (name.length < 3) invalidFields.push(nameField);
+  if (lastName.length < 2) invalidFields.push(lastNameField);
+  if (idDigits.length < 5) invalidFields.push(idField);
   if (phoneDigits.length < 10) invalidFields.push(phoneField);
   if (!service) invalidFields.push(serviceField);
 
   if (invalidFields.length) {
     invalidFields.forEach(field => field.classList.add('is-invalid'));
-    setFormStatus('Completa nombre, teléfono y servicio antes de continuar.', 'error');
+    setFormStatus('Completa nombre, apellido, cedula, telefono y servicio antes de continuar.', 'error');
     invalidFields[0].focus();
     return;
   }
 
   let msg = 'Hola, quiero agendar una cita en Checkar.';
-  msg += ` Soy ${name}.`;
+  msg += ` Nombre: ${name} ${lastName}.`;
+  msg += ` Cedula: ${idDigits}.`;
   msg += ` Servicio: ${service}.`;
   if (date) {
     const preferredDate = new Date(`${date}T12:00:00`);
     msg += ` Fecha preferida: ${preferredDate.toLocaleDateString('es-CO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}.`;
   }
-  if (phone)   msg += ` Mi teléfono: ${phone}.`;
+  if (phone) msg += ` Telefono: ${phone}.`;
 
   setFormStatus('Abriendo WhatsApp...', 'success');
   window.open(`https://wa.me/573183586103?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
