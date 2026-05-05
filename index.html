@@ -38,21 +38,21 @@
     /* ── Design System Tokens (Checkar UI Kit) ────── */
     :root {
       /* Brand Blues */
-      --c-blue-logo:    #2f8fe0;
-      --c-blue-primary: #2b82cf;
-      --c-blue-rich:    #2674bc;
-      --c-blue-deep:    #1f629f;
-      --c-blue-nav:     #2b84d2;
-      --c-blue-dark:    #174a78;
-      --c-blue-ink:     #14466f;
-      --c-blue-muted:   #3f8fce;
+      --c-blue-logo:    #45a2ef;
+      --c-blue-primary: #3998e6;
+      --c-blue-rich:    #328cd8;
+      --c-blue-deep:    #2b7cc3;
+      --c-blue-nav:     #3ea0f0;
+      --c-blue-dark:    #216aa8;
+      --c-blue-ink:     #195b91;
+      --c-blue-muted:   #55a6e4;
       /* Accent Blues */
-      --c-blue-lt:      #69b3f2;
-      --c-blue-sky:     #96cfff;
-      --c-cyan:         #68d1ef;
-      --c-cyan-lt:      #c0e9fb;
-      --c-blue-light2:  #d9efff;
-      --c-blue-subtle:  #ebf6ff;
+      --c-blue-lt:      #8ac8fb;
+      --c-blue-sky:     #bbe1ff;
+      --c-cyan:         #87e1f7;
+      --c-cyan-lt:      #def5ff;
+      --c-blue-light2:  #ebf7ff;
+      --c-blue-subtle:  #f5fbff;
       /* Neutrals */
       --c-white:        #ffffff;
       --c-bg-dark:      #020810;
@@ -66,9 +66,9 @@
       --border-nav:         rgba(173,226,255,.34);
       --border-divider:     rgba(255,255,255,.1);
       /* Gradients */
-      --grad-hero:       linear-gradient(165deg, #2378c4 0%, #2d8ad8 46%, #1e6eb6 100%);
+      --grad-hero:       linear-gradient(165deg, #3390df 0%, #3ca3f1 46%, #2f88d7 100%);
       --grad-blue-cyan:  linear-gradient(135deg, var(--c-blue-primary), var(--c-cyan));
-      --grad-card-hover: linear-gradient(150deg, #2f86cf 0%, #266eaf 58%, #1d5789 100%);
+      --grad-card-hover: linear-gradient(150deg, #4ba7f0 0%, #388fd7 58%, #286eae 100%);
       --grad-stat:       linear-gradient(135deg, #ffffff, #d9efff);
       --grad-wa:         linear-gradient(135deg, #25d366, #128c7e);
       --grad-white-btn:  linear-gradient(135deg, #ffffff, #e9f6ff);
@@ -91,8 +91,8 @@
     body {
       font-family: 'Nunito Sans', system-ui, sans-serif;
       background:
-        radial-gradient(circle at 15% 12%, rgba(255,255,255,.14) 0%, transparent 28%),
-        radial-gradient(circle at 85%  3%, rgba(255,255,255,.1) 0%, transparent 24%),
+        radial-gradient(circle at 15% 12%, rgba(255,255,255,.18) 0%, transparent 28%),
+        radial-gradient(circle at 85%  3%, rgba(255,255,255,.14) 0%, transparent 24%),
         var(--grad-hero);
       background-attachment: fixed;
       color: var(--c-white);
@@ -211,13 +211,13 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       height: 100px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
       padding: 0 clamp(20px, 6vw, 60px);
-      background: linear-gradient(135deg, rgba(46,132,206,.94) 0%, rgba(36,109,176,.93) 100%);
+      background: linear-gradient(135deg, rgba(62,160,240,.95) 0%, rgba(49,141,222,.93) 100%);
       backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px);
       border-bottom: 1px solid rgba(255,255,255,.1);
       box-shadow: 0 8px 32px rgba(6,47,84,.15);
       transition: background .3s, box-shadow .3s;
     }
-    .nav.solid { background: linear-gradient(135deg, rgba(46,132,206,.98) 0%, rgba(36,109,176,.97) 100%); box-shadow: 0 12px 40px rgba(6,47,84,.25); }
+    .nav.solid { background: linear-gradient(135deg, rgba(62,160,240,.98) 0%, rgba(49,141,222,.97) 100%); box-shadow: 0 12px 40px rgba(6,47,84,.25); }
 
     .nav-logo { display: inline-flex; align-items: center; flex-shrink: 0; transition: transform .3s cubic-bezier(.34,1.56,.64,1), filter .3s; }
     .nav-logo:hover { transform: scale(1.05); filter: brightness(1.1); }
@@ -1597,9 +1597,9 @@ if (burger && drawer) {
 /* ── CANVAS SCROLL ANIMATION ─────────────────────────────────── */
 const TOTAL = 117;
 
-const BG1 = 'radial-gradient(circle at 50% 38%, rgba(107,175,235,.15) 0%, transparent 28%), linear-gradient(165deg,#163654 0%,#1f5278 44%,#13314d 100%)';
-const BG2 = 'radial-gradient(circle at 52% 40%, rgba(95,152,209,.10) 0%, transparent 30%), linear-gradient(165deg,#0c1824 0%,#13283b 46%,#0a1621 100%)';
-const BG3 = 'radial-gradient(circle at 48% 34%, rgba(125,191,244,.14) 0%, transparent 26%), linear-gradient(165deg,#1c4160 0%,#27608b 45%,#173955 100%)';
+const BG1 = 'radial-gradient(circle at 50% 38%, rgba(126,185,225,.14) 0%, transparent 28%), linear-gradient(165deg,#1a405f 0%,#245678 44%,#14324a 100%)';
+const BG2 = 'radial-gradient(circle at 52% 40%, rgba(82,133,176,.08) 0%, transparent 30%), linear-gradient(165deg,#0b1a28 0%,#12283b 46%,#08131d 100%)';
+const BG3 = 'radial-gradient(circle at 48% 34%, rgba(164,208,238,.15) 0%, transparent 26%), linear-gradient(165deg,#285271 0%,#34719a 45%,#1d4664 100%)';
 
 const canvas  = document.getElementById('car-canvas');
 const ctx     = canvas.getContext('2d');
