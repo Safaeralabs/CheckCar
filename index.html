@@ -90,22 +90,15 @@
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
       font-family: 'Nunito Sans', system-ui, sans-serif;
-      background:
-        radial-gradient(circle at 15% 12%, rgba(255,255,255,.18) 0%, transparent 28%),
-        radial-gradient(circle at 85%  3%, rgba(255,255,255,.14) 0%, transparent 24%),
-        var(--grad-hero);
+      background: var(--c-white);
       background-attachment: fixed;
-      color: var(--c-white);
+      color: var(--c-blue-ink);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
     img, canvas { display: block; }
     a { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
-
-    body {
-      color: var(--c-blue-ink);
-    }
 
     /* ── Utilities ───────────────────────────────── */
     .container { max-width: var(--max); margin: 0 auto; padding: 0 5%; }
@@ -1091,7 +1084,7 @@
 
     @media (max-width: 768px) {
       .nav { height: 95px; gap: 16px; padding: 0 clamp(16px, 5vw, 24px); }
-      #stage { height: 380vh; }
+      #stage { height: 300vh; }
       #servicios, #por-que, #proceso, #guia, #vehiculos, #faq, #contacto { padding: 60px 0; }
       footer { padding: 44px 5% 28px; }
       .nav-links, .nav-wa { display: none; }
@@ -1721,6 +1714,10 @@ let scrollTarget = 0;   // 0..TOTAL-1, set by scroll event
 let displayPos   = 0;   // interpolated current position
 let rafActive    = false;
 
+function isMobileScene() {
+  return window.innerWidth <= 768;
+}
+
 // ── Sizing ──
 function resizeCanvas() {
   const isMobile = window.innerWidth <= 768;
@@ -1786,7 +1783,7 @@ function updateScene(p) {
 // ── Spring RAF loop ──
 function rafLoop() {
   const diff = scrollTarget - displayPos;
-  displayPos += diff * 0.28;           // spring factor (higher = more responsive)
+  displayPos += diff * (isMobileScene() ? 0.42 : 0.28);
 
   renderAt(displayPos);
   updateScene(displayPos / (TOTAL - 1));
@@ -1806,6 +1803,15 @@ window.addEventListener('scroll', () => {
   const maxScroll = stageEl.offsetHeight - window.innerHeight;
   const p = maxScroll > 0 ? Math.max(0, Math.min(window.scrollY / maxScroll, 1)) : 0;
   scrollTarget = p * (TOTAL - 1);
+
+  if (isMobileScene()) {
+    displayPos = scrollTarget;
+    renderAt(displayPos);
+    updateScene(displayPos / (TOTAL - 1));
+    rafActive = false;
+    return;
+  }
+
   if (!rafActive) { rafActive = true; requestAnimationFrame(rafLoop); }
 }, { passive: true });
 
@@ -1826,6 +1832,7 @@ for (let i = 0; i < TOTAL; i++) {
 window.addEventListener('resize', resizeCanvas, { passive: true });
 resizeCanvas();
 updateScene(0);
+window.dispatchEvent(new Event('scroll'));
 
 /* ── 3D CARD TILT ─────────────────────────────────────────────── */
 document.querySelectorAll('.svc-card, .ben, .step-card, .info-card, .guide-card, .vehicle-card, .trust-card').forEach(card => {
