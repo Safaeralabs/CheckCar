@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compra tu SOAT en minutos con Checkar. Sube tu tarjeta de propiedad, completa tus datos y recibe tu cotización al instante por WhatsApp.">
+  <title>Comprar SOAT | Checkar</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Tokens ───────────────────────────────────────────────── */
+    :root {
+      --bg:          #060d1f;
+      --bg-2:        #081428;
+      --bg-card:     #0c1b34;
+      --bg-card-2:   #0f2040;
+      --blue:        #1a6af5;
+      --blue-lt:     #4d8ef8;
+      --blue-glow:   rgba(26,106,245,.40);
+      --blue-border: rgba(26,106,245,.22);
+      --text:        #ffffff;
+      --text-muted:  rgba(255,255,255,.62);
+      --text-dim:    rgba(255,255,255,.38);
+      --border:      rgba(255,255,255,.07);
+      --border-2:    rgba(255,255,255,.12);
+      --green:       #25d366;
+      --green-dk:    #128c7e;
+      --r:     24px;
+      --r-md:  16px;
+      --r-sm:  12px;
+      --r-btn: 100px;
+      --max:   1200px;
+    }
+
+    /* ── Reset ────────────────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Nunito Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    img { display: block; }
+    a { color: inherit; text-decoration: none; touch-action: manipulation; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; touch-action: manipulation; }
+
+    /* ── Nav ──────────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 1000;
+      height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 0 clamp(20px, 5vw, 56px);
+      background: rgba(6,13,31,.97);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(26,106,245,.15);
+      box-shadow: 0 4px 24px rgba(0,0,0,.4);
+    }
+    .nav-left { display: flex; align-items: center; gap: 20px; }
+    .nav-logo img { height: 100px; width: auto; }
+    .nav-divider { width: 1px; height: 28px; background: rgba(255,255,255,.12); }
+    .nav-subtitle { font-size: 13px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+    .nav-secure {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 700; color: var(--blue-lt);
+    }
+    .nav-secure svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      color: var(--text-muted); font-size: 14px; font-weight: 600;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--text); }
+    .nav-back svg { width: 16px; height: 16px; }
+
+    /* ── Page layout ──────────────────────────────────────────── */
+    .page-wrap {
+      max-width: var(--max); margin: 0 auto;
+      padding: 48px 5% 80px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── Left column ──────────────────────────────────────────── */
+    .soat-headline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(34px, 4.5vw, 58px);
+      font-weight: 900; line-height: 1.05; letter-spacing: -2px;
+      margin-bottom: 14px;
+    }
+    .soat-headline .accent { color: var(--blue-lt); }
+    .soat-lead { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; max-width: 480px; }
+
+    /* ── Steps ────────────────────────────────────────────────── */
+    .step-block { margin-bottom: 28px; }
+    .step-title {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .step-num-badge {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue) 0%, #1154d4 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 900; color: #fff;
+      box-shadow: 0 4px 14px rgba(26,106,245,.45);
+    }
+    .step-title-text { font-size: 16px; font-weight: 800; line-height: 1.3; }
+
+    /* ── Upload area ──────────────────────────────────────────── */
+    .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .upload-area {
+      border: 1.5px dashed rgba(26,106,245,.45);
+      border-radius: var(--r-md);
+      background: rgba(26,106,245,.04);
+      padding: 32px 20px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; transition: border-color .2s, background .2s;
+      min-height: 160px;
+    }
+    .upload-area:hover, .upload-area.drag-over {
+      border-color: var(--blue-lt);
+      background: rgba(26,106,245,.08);
+    }
+    .upload-area svg { width: 40px; height: 40px; stroke: var(--blue-lt); fill: none; stroke-width: 1.5; }
+    .upload-area-text { font-size: 14px; font-weight: 700; color: var(--text-muted); text-align: center; }
+    .upload-area-or { font-size: 12px; color: var(--text-dim); }
+    .btn-upload-file {
+      background: var(--blue); color: #fff;
+      padding: 9px 22px; border-radius: var(--r-btn);
+      font-size: 13px; font-weight: 700;
+      transition: background .2s, transform .2s;
+    }
+    .btn-upload-file:hover { background: var(--blue-lt); transform: translateY(-1px); }
+    .upload-formats { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+    .upload-preview {
+      border: 1.5px solid rgba(26,106,245,.3);
+      border-radius: var(--r-md);
+      background: rgba(26,106,245,.05);
+      padding: 12px;
+      display: none; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 160px; position: relative;
+    }
+    .upload-preview.show { display: flex; }
+    .preview-img {
+      max-width: 100%; max-height: 120px;
+      object-fit: contain; border-radius: 8px;
+    }
+    .preview-pdf {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-muted); font-size: 13px; font-weight: 600; text-align: center;
+    }
+    .preview-pdf svg { width: 36px; height: 36px; stroke: var(--blue-lt); fill: none; stroke-width: 1.5; }
+    .preview-check {
+      position: absolute; top: 10px; right: 10px;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #22c55e; display: flex; align-items: center; justify-content: center;
+    }
+    .preview-check svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2.5; }
+    .btn-remove-file {
+      margin-top: 10px;
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; color: var(--text-dim); font-weight: 600;
+      transition: color .2s;
+    }
+    .btn-remove-file:hover { color: #f85050; }
+    .btn-remove-file svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+    /* ── Owner toggle ─────────────────────────────────────────── */
+    .owner-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .toggle-btn {
+      padding: 13px 20px; border-radius: var(--r-sm);
+      border: 1.5px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      font-size: 15px; font-weight: 700; color: var(--text-muted);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all .2s;
+    }
+    .toggle-btn:hover { border-color: rgba(26,106,245,.4); color: var(--text); }
+    .toggle-btn.active {
+      background: var(--blue); border-color: var(--blue);
+      color: #fff; box-shadow: 0 4px 18px rgba(26,106,245,.4);
+    }
+    .toggle-btn .check-ic {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .toggle-btn.active .check-ic { background: rgba(255,255,255,.3); }
+    .toggle-btn .check-ic svg { width: 10px; height: 10px; stroke: #fff; fill: none; stroke-width: 3; }
+
+    /* Extra owner fields (shown when No) */
+    .owner-extra {
+      margin-top: 16px;
+      display: none; flex-direction: column; gap: 12px;
+    }
+    .owner-extra.show { display: flex; }
+
+    /* ── Form fields ──────────────────────────────────────────── */
+    .fields-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .field-wrap { display: flex; flex-direction: column; gap: 0; }
+    .field-inner {
+      display: flex; align-items: center;
+      background: rgba(255,255,255,.04);
+      border: 1.5px solid rgba(255,255,255,.1);
+      border-radius: var(--r-sm);
+      transition: border-color .2s, background .2s, box-shadow .2s;
+      overflow: hidden;
+    }
+    .field-inner:focus-within {
+      border-color: rgba(26,106,245,.6);
+      background: rgba(26,106,245,.06);
+      box-shadow: 0 0 0 3px rgba(26,106,245,.12);
+    }
+    .field-inner.is-invalid {
+      border-color: rgba(248,80,80,.8);
+      background: rgba(248,80,80,.06);
+      box-shadow: 0 0 0 3px rgba(248,80,80,.12);
+    }
+    .field-ic {
+      padding: 0 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .field-ic svg { width: 16px; height: 16px; stroke: var(--text-dim); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .field-inner:focus-within .field-ic svg { stroke: var(--blue-lt); }
+    .field-inner input {
+      flex: 1; background: none; border: none; outline: none;
+      padding: 13px 12px 13px 0;
+      color: var(--text); font-size: 14px; font-weight: 500;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+    .field-inner input::placeholder { color: rgba(255,255,255,.25); }
+
+    /* ── Privacy note ─────────────────────────────────────────── */
+    .privacy-note {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 12px; color: var(--text-dim); margin-top: 14px; line-height: 1.5;
+    }
+    .privacy-note svg { width: 14px; height: 14px; stroke: var(--blue-lt); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* ── Form action buttons ──────────────────────────────────── */
+    .form-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .btn-cotizar {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--blue); color: #fff;
+      padding: 15px 24px; border-radius: var(--r-md);
+      font-size: 15px; font-weight: 800; font-family: 'Nunito Sans', sans-serif;
+      box-shadow: 0 8px 28px rgba(26,106,245,.4);
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn-cotizar:hover { background: var(--blue-lt); transform: translateY(-2px); box-shadow: 0 14px 36px rgba(26,106,245,.55); }
+    .btn-cotizar svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn-wa-soat {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      background: rgba(37,211,102,.1); color: var(--green);
+      padding: 15px 24px; border-radius: var(--r-md);
+      font-size: 15px; font-weight: 700;
+      border: 1.5px solid rgba(37,211,102,.25);
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .btn-wa-soat:hover { background: rgba(37,211,102,.18); border-color: rgba(37,211,102,.5); transform: translateY(-2px); }
+    .btn-wa-soat svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* ── Status message ───────────────────────────────────────── */
+    .form-status { min-height: 18px; margin-top: 10px; font-size: 12px; font-weight: 700; color: var(--text-dim); text-align: center; }
+    .form-status[data-s="error"]   { color: #f85050; }
+    .form-status[data-s="success"] { color: var(--green); }
+
+    /* ── Right sidebar ────────────────────────────────────────── */
+    .soat-sidebar { position: sticky; top: 88px; }
+
+    .car-visual {
+      position: relative; border-radius: var(--r);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(18,72,180,.3) 0%, transparent 70%),
+        linear-gradient(160deg, #071428 0%, #060d1f 100%);
+      border: 1px solid var(--blue-border);
+      overflow: hidden; margin-bottom: 20px;
+      padding: 28px 20px 12px;
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .car-img { width: 100%; max-width: 280px; filter: drop-shadow(0 12px 32px rgba(0,0,0,.7)) drop-shadow(0 0 24px rgba(26,106,245,.25)); }
+    .car-badge {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(6,13,31,.85); backdrop-filter: blur(12px);
+      border: 1px solid var(--blue-border); border-radius: var(--r-md);
+      padding: 12px 16px; text-align: center;
+    }
+    .car-badge svg { width: 28px; height: 28px; stroke: var(--blue-lt); fill: none; stroke-width: 1.5; margin: 0 auto 6px; }
+    .car-badge-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; }
+    .car-badge-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* Benefits card */
+    .benefits-card {
+      background: var(--bg-card); border: 1px solid var(--blue-border);
+      border-radius: var(--r); padding: 24px 22px;
+    }
+    .benefits-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; margin-bottom: 18px; color: var(--text); }
+    .benefit-row {
+      display: flex; align-items: flex-start; gap: 13px;
+      padding: 11px 0; border-bottom: 1px solid var(--border);
+    }
+    .benefit-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .benefit-ic {
+      width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px;
+      background: rgba(26,106,245,.15); border: 1px solid rgba(26,106,245,.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .benefit-ic svg { width: 17px; height: 17px; stroke: var(--blue-lt); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .benefit-text strong { display: block; font-size: 13px; font-weight: 800; margin-bottom: 2px; }
+    .benefit-text span  { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+    .exp-badge {
+      margin-top: 18px; display: flex; align-items: center; gap: 14px;
+      background: rgba(26,106,245,.08); border: 1px solid rgba(26,106,245,.18);
+      border-radius: var(--r-md); padding: 14px 16px;
+    }
+    .exp-num { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: var(--text); letter-spacing: -1px; line-height: 1; white-space: nowrap; }
+    .exp-text { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    /* ── Success modal ────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.7); backdrop-filter: blur(8px);
+      display: none; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal-box {
+      background: var(--bg-card); border: 1px solid var(--blue-border);
+      border-radius: var(--r); padding: 40px 36px; max-width: 440px; width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
+    }
+    .modal-icon {
+      width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 20px;
+      background: rgba(37,211,102,.15); border: 2px solid rgba(37,211,102,.3);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-icon svg { width: 30px; height: 30px; stroke: var(--green); fill: none; stroke-width: 2; }
+    .modal-title { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+    .modal-body { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; }
+    .modal-body strong { color: var(--text); }
+    .modal-close {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--blue); color: #fff;
+      padding: 13px 32px; border-radius: var(--r-btn);
+      font-size: 15px; font-weight: 800; font-family: 'Nunito Sans', sans-serif;
+      transition: background .2s, transform .2s;
+    }
+    .modal-close:hover { background: var(--blue-lt); transform: translateY(-2px); }
+
+    /* ── WhatsApp float ───────────────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 24px; bottom: max(24px, env(safe-area-inset-bottom, 24px));
+      right: 24px; z-index: 999;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--green); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(37,211,102,.55);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .wa-float:hover { transform: scale(1.12); box-shadow: 0 10px 36px rgba(37,211,102,.75); }
+    .wa-float svg { width: 28px; height: 28px; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; gap: 36px; }
+      .soat-sidebar { position: static; }
+      .car-visual { display: none; }
+    }
+    @media (max-width: 600px) {
+      .page-wrap { padding: 28px 5% 60px; }
+      .upload-grid { grid-template-columns: 1fr; }
+      .fields-grid { grid-template-columns: 1fr; }
+      .form-actions { grid-template-columns: 1fr; }
+      .soat-headline { font-size: clamp(28px, 8vw, 40px); }
+      .nav-subtitle { display: none; }
+      .nav-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ──────────────────────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo"><img src="assets/logo_blanco.png" alt="Checkar"></a>
+    <div class="nav-divider"></div>
+    <span class="nav-subtitle">Compra tu SOAT 100% digital</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:20px">
+    <div class="nav-secure">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Proceso seguro y protegido
+    </div>
+    <a href="index.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
+    </a>
+  </div>
+</nav>
+
+<!-- ── Main ─────────────────────────────────────────────────────── -->
+<div class="page-wrap">
+
+  <!-- Left: form -->
+  <div class="soat-left">
+    <h1 class="soat-headline">Compra tu <span class="accent">SOAT</span><br>en minutos</h1>
+    <p class="soat-lead">Sube la tarjeta de propiedad y completa tus datos para generar tu cotización. Te respondemos con el precio y los datos de pago por WhatsApp.</p>
+
+    <form id="soat-form" novalidate>
+
+      <!-- Step 1 -->
+      <div class="step-block">
+        <div class="step-title">
+          <div class="step-num-badge">1</div>
+          <div>
+            <div class="step-title-text">Sube la tarjeta de propiedad</div>
+            <div style="font-size:12px;color:var(--text-dim);margin-top:2px">Sube una foto clara de tu tarjeta de propiedad.</div>
+          </div>
+        </div>
+
+        <div class="upload-grid">
+          <div class="upload-area" id="upload-area" role="button" tabindex="0" aria-label="Subir tarjeta de propiedad">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h.01M3 15l5-5 4 4 3-3 4 4"/></svg>
+            <div class="upload-area-text">Arrastra tu archivo aquí</div>
+            <div class="upload-area-or">o</div>
+            <button type="button" class="btn-upload-file" id="btn-subir">Subir foto</button>
+            <div class="upload-formats">Formatos: JPG, PNG, PDF</div>
+            <input type="file" id="prop-card-file" accept="image/jpeg,image/png,application/pdf" style="display:none" aria-label="Seleccionar archivo">
+          </div>
+
+          <div class="upload-preview" id="upload-preview">
+            <div class="preview-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <img id="preview-img" class="preview-img" alt="Vista previa" style="display:none">
+            <div id="preview-pdf" class="preview-pdf" style="display:none">
+              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span id="pdf-name"></span>
+            </div>
+            <button type="button" class="btn-remove-file" id="btn-remove">
+              <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg>
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-block">
+        <div class="step-title">
+          <div class="step-num-badge">2</div>
+          <div class="step-title-text">¿El SOAT saldrá a nombre del propietario registrado?</div>
+        </div>
+
+        <div class="owner-toggle">
+          <button type="button" class="toggle-btn active" id="btn-si">
+            <span class="check-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+            Sí
+          </button>
+          <button type="button" class="toggle-btn" id="btn-no">No</button>
+        </div>
+
+        <div class="owner-extra" id="owner-extra">
+          <div style="font-size:13px;color:var(--text-muted);margin-bottom:4px;font-weight:600">Datos del propietario registrado en la tarjeta:</div>
+          <div class="fields-grid">
+            <div class="field-wrap">
+              <div class="field-inner" id="fi-oname">
+                <div class="field-ic"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <input id="f-oname" type="text" placeholder="Nombre del propietario" autocomplete="off">
+              </div>
+            </div>
+            <div class="field-wrap">
+              <div class="field-inner" id="fi-ocedula">
+                <div class="field-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="12" y2="13"/></svg></div>
+                <input id="f-ocedula" type="text" placeholder="Cédula del propietario" inputmode="numeric" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-block">
+        <div class="step-title">
+          <div class="step-num-badge">3</div>
+          <div class="step-title-text">Datos de la persona a la que saldrá el SOAT</div>
+        </div>
+
+        <div class="fields-grid">
+          <div class="field-wrap">
+            <div class="field-inner" id="fi-name">
+              <div class="field-ic"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+              <input id="f-name" type="text" placeholder="Nombre completo" autocomplete="name" required>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <div class="field-inner" id="fi-cedula">
+              <div class="field-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="12" y2="13"/></svg></div>
+              <input id="f-cedula" type="text" placeholder="Cédula de ciudadanía" inputmode="numeric" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <div class="field-inner" id="fi-email">
+              <div class="field-ic"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <input id="f-email" type="email" placeholder="Correo electrónico" autocomplete="email" required>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <div class="field-inner" id="fi-phone">
+              <div class="field-ic"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
+              <input id="f-phone" type="tel" placeholder="Número celular" autocomplete="tel" inputmode="tel" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="privacy-note">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Tus datos están protegidos y serán usados únicamente para la compra del SOAT.
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="form-actions">
+        <button type="submit" class="btn-cotizar">
+          Continuar cotización
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <a href="https://wa.me/573183586103?text=Hola%20Checkar%2C%20quiero%20cotizar%20mi%20SOAT." target="_blank" rel="noopener" class="btn-wa-soat">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Hablar por WhatsApp
+        </a>
+      </div>
+      <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+
+    </form>
+  </div>
+
+  <!-- Right: sidebar -->
+  <div class="soat-sidebar">
+    <div class="car-visual">
+      <img src="animation/transparent/ezgif-frame-001.png" alt="Vehículo" class="car-img">
+      <div class="car-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="car-badge-title">SOAT digital</div>
+        <div class="car-badge-sub">Entrega inmediata</div>
+      </div>
+    </div>
+
+    <div class="benefits-card">
+      <div class="benefits-title">¿Por qué comprar tu SOAT con Checkar?</div>
+
+      <div class="benefit-row">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></div>
+        <div class="benefit-text">
+          <strong>Compra rápida</strong>
+          <span>Cotiza y compra en pocos minutos.</span>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div class="benefit-text">
+          <strong>Atención por WhatsApp</strong>
+          <span>Te acompañamos en todo el proceso.</span>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="benefit-text">
+          <strong>SOAT digital inmediato</strong>
+          <span>Recibe tu SOAT al instante en tu correo.</span>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="benefit-text">
+          <strong>Pago seguro</strong>
+          <span>Tus pagos están 100% protegidos.</span>
+        </div>
+      </div>
+
+      <div class="exp-badge">
+        <div class="exp-num">+15</div>
+        <div class="exp-text">Más de 15 años<br>de experiencia en el sector</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Success modal ─────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-box">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="modal-title" id="modal-title">¡Casi listo!</h2>
+    <p class="modal-body">
+      Se abrió WhatsApp con todos tus datos.<br><br>
+      <strong>Adjunta la foto de tu tarjeta de propiedad</strong> al inicio del chat para que el equipo de Checkar pueda cotizarte el SOAT de inmediato.
+    </p>
+    <button class="modal-close" id="modal-close">Entendido</button>
+  </div>
+</div>
+
+<!-- ── WA float ──────────────────────────────────────────────────── -->
+<a href="https://wa.me/573183586103?text=Hola%2C%20quiero%20cotizar%20mi%20SOAT%20con%20Checkar." target="_blank" rel="noopener" class="wa-float" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ── File upload ──────────────────────────────────────────────────── */
+const uploadArea  = document.getElementById('upload-area');
+const fileInput   = document.getElementById('prop-card-file');
+const preview     = document.getElementById('upload-preview');
+const previewImg  = document.getElementById('preview-img');
+const previewPdf  = document.getElementById('preview-pdf');
+const pdfName     = document.getElementById('pdf-name');
+const btnSubir    = document.getElementById('btn-subir');
+const btnRemove   = document.getElementById('btn-remove');
+let uploadedFile  = null;
+
+btnSubir.addEventListener('click', () => fileInput.click());
+uploadArea.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') fileInput.click(); });
+
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+uploadArea.addEventListener('drop', e => {
+  e.preventDefault(); uploadArea.classList.remove('drag-over');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+
+function handleFile(file) {
+  uploadedFile = file;
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = ev => { previewImg.src = ev.target.result; previewImg.style.display = 'block'; previewPdf.style.display = 'none'; };
+    reader.readAsDataURL(file);
+  } else {
+    previewImg.style.display = 'none';
+    previewPdf.style.display = 'flex';
+    pdfName.textContent = file.name.length > 28 ? file.name.slice(0, 25) + '…' : file.name;
+  }
+  uploadArea.style.display = 'none';
+  preview.classList.add('show');
+}
+
+btnRemove.addEventListener('click', () => {
+  uploadedFile = null;
+  fileInput.value = '';
+  previewImg.src = ''; previewImg.style.display = 'none';
+  previewPdf.style.display = 'none';
+  preview.classList.remove('show');
+  uploadArea.style.display = '';
+});
+
+/* ── Owner toggle ─────────────────────────────────────────────────── */
+const btnSi     = document.getElementById('btn-si');
+const btnNo     = document.getElementById('btn-no');
+const ownerExtra = document.getElementById('owner-extra');
+let ownerEsSi   = true;
+
+btnSi.addEventListener('click', () => {
+  ownerEsSi = true;
+  btnSi.classList.add('active'); btnNo.classList.remove('active');
+  ownerExtra.classList.remove('show');
+});
+btnNo.addEventListener('click', () => {
+  ownerEsSi = false;
+  btnNo.classList.add('active'); btnSi.classList.remove('active');
+  ownerExtra.classList.add('show');
+});
+
+/* ── Form validation helpers ──────────────────────────────────────── */
+function markField(id, valid) {
+  document.getElementById(id).classList.toggle('is-invalid', !valid);
+}
+function setStatus(msg, state) {
+  const el = document.getElementById('form-status');
+  el.textContent = msg;
+  if (state) el.dataset.s = state; else delete el.dataset.s;
+}
+
+[['fi-name','f-name'],['fi-cedula','f-cedula'],['fi-email','f-email'],['fi-phone','f-phone']].forEach(([fi, f]) => {
+  document.getElementById(f).addEventListener('input', () => {
+    document.getElementById(fi).classList.remove('is-invalid');
+    if (document.getElementById('form-status').dataset.s === 'error') setStatus('');
+  });
+});
+
+/* ── Form submit ──────────────────────────────────────────────────── */
+document.getElementById('soat-form').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const name   = document.getElementById('f-name').value.trim();
+  const cedula = document.getElementById('f-cedula').value.replace(/\D/g,'');
+  const email  = document.getElementById('f-email').value.trim();
+  const phone  = document.getElementById('f-phone').value.replace(/\D/g,'');
+  const oname  = document.getElementById('f-oname').value.trim();
+  const oced   = document.getElementById('f-ocedula').value.replace(/\D/g,'');
+
+  let bad = false;
+  if (name.length < 3)     { markField('fi-name', false);   bad = true; }
+  if (cedula.length < 5)   { markField('fi-cedula', false); bad = true; }
+  if (!/\S+@\S+\.\S+/.test(email)) { markField('fi-email', false); bad = true; }
+  if (phone.length < 10)   { markField('fi-phone', false);  bad = true; }
+  if (!ownerEsSi) {
+    if (oname.length < 3)  { markField('fi-oname', false);  bad = true; }
+    if (oced.length < 5)   { markField('fi-ocedula', false); bad = true; }
+  }
+
+  if (bad) { setStatus('Por favor completa todos los campos requeridos.', 'error'); return; }
+
+  let msg = 'Hola Checkar, quiero cotizar y comprar mi SOAT.\n\n';
+  msg += `*¿SOAT a nombre del propietario registrado?* ${ownerEsSi ? 'Sí' : 'No'}\n`;
+  if (!ownerEsSi) {
+    msg += `\n*Datos del propietario:*\n`;
+    msg += `• Nombre: ${oname}\n• Cédula: ${oced}\n`;
+  }
+  msg += `\n*Datos del tomador del SOAT:*\n`;
+  msg += `• Nombre: ${name}\n`;
+  msg += `• Cédula: ${cedula}\n`;
+  msg += `• Correo: ${email}\n`;
+  msg += `• Celular: +57 ${phone}\n`;
+  if (uploadedFile) msg += `\n📎 Te adjunto la foto de mi tarjeta de propiedad.\n`;
+  msg += `\nPor favor indícame el valor y los datos de pago. ¡Gracias!`;
+
+  setStatus('Abriendo WhatsApp…', 'success');
+  window.open(`https://wa.me/573183586103?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  if (uploadedFile) document.getElementById('modal').classList.add('show');
+});
+
+/* ── Modal close ──────────────────────────────────────────────────── */
+document.getElementById('modal-close').addEventListener('click', () => {
+  document.getElementById('modal').classList.remove('show');
+});
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) document.getElementById('modal').classList.remove('show');
+});
+</script>
+</body>
+</html>
