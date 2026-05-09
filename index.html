@@ -16,6 +16,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://checkar.com.co/logo.jpg">
 
+  <link rel="preload" as="image" href="animation/webp/ezgif-frame-001.webp" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800&display=swap" rel="stylesheet">
@@ -1964,20 +1965,20 @@ document.querySelectorAll('.stat-item').forEach(el => statsObs.observe(el));
   const canvas  = document.getElementById('hero-car-canvas');
   if (!canvas || !wrapper) return;
 
-  const ctx = canvas.getContext('2d');
-  const DPR = Math.min(window.devicePixelRatio || 1, 2);
-  const SIZE = 600;
+  const ctx  = canvas.getContext('2d');
+  const DPR  = Math.min(window.devicePixelRatio || 1, 2);
+  const SIZE = window.innerWidth < 768 ? 420 : 600;
   canvas.width  = SIZE * DPR;
   canvas.height = SIZE * DPR;
   ctx.scale(DPR, DPR);
 
   const TOTAL  = 117;
-  const frames = [];
-  let loaded   = 0;
+  const frames = new Array(TOTAL).fill(null);
   let current  = 0;
   let raf      = null;
 
   function pad(n) { return String(n).padStart(3, '0'); }
+  function src(i) { return `animation/webp/ezgif-frame-${pad(i + 1)}.webp`; }
 
   function render(i) {
     const img = frames[Math.max(0, Math.min(i, TOTAL - 1))];
@@ -1986,12 +1987,40 @@ document.querySelectorAll('.stat-item').forEach(el => statsObs.observe(el));
     ctx.drawImage(img, 0, 0, SIZE, SIZE);
   }
 
-  for (let i = 0; i < TOTAL; i++) {
-    const img = new Image();
-    img.onload = () => { if (++loaded === 1) render(0); };
-    img.src = `animation/transparent/ezgif-frame-${pad(i + 1)}.png`;
-    frames.push(img);
+  function loadFrame(i) {
+    if (frames[i]) return Promise.resolve();
+    return new Promise(res => {
+      const img = new Image();
+      img.onload  = () => { frames[i] = img; res(); };
+      img.onerror = () => res();
+      img.src = src(i);
+    });
   }
+
+  async function loadAll() {
+    /* frame 0 first so there is something to show immediately */
+    await loadFrame(0);
+    render(0);
+    /* load the rest in batches of 10, yielding between batches */
+    const BATCH = 10;
+    for (let i = 1; i < TOTAL; i += BATCH) {
+      const batch = [];
+      for (let j = i; j < Math.min(i + BATCH, TOTAL); j++) batch.push(loadFrame(j));
+      await Promise.all(batch);
+      await new Promise(r => setTimeout(r, 0));
+    }
+  }
+
+  /* start loading only when the hero wrapper enters the viewport */
+  let started = false;
+  const startObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !started) {
+      started = true;
+      startObs.disconnect();
+      loadAll();
+    }
+  }, { rootMargin: '300px' });
+  startObs.observe(wrapper);
 
   window.addEventListener('scroll', () => {
     const scrollable = wrapper.offsetHeight - window.innerHeight;
