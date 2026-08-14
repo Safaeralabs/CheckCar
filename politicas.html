@@ -97,9 +97,10 @@
     .norm small { font-size: 11px; font-weight: 600; color: var(--text-muted); margin-top: 2px; }
     .seals { display: flex; flex-wrap: wrap; gap: 34px; align-items: flex-start; }
     .seal { display: flex; flex-direction: column; gap: 10px; }
-    .seal img { height: 66px; width: auto; opacity: .96; }
+    .seal img { height: 92px; width: auto; opacity: .96; }
     .seal small { font-size: 11px; color: var(--text-dim); letter-spacing: .4px; text-transform: uppercase; }
-    .seal-slot { height: 66px; min-width: 210px; border: 1px dashed rgba(255,255,255,.22); border-radius: 12px; display: grid; place-items: center; padding: 0 18px; text-align: center; font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+    .seal-slot { height: 92px; min-width: 210px; border: 1px dashed rgba(255,255,255,.22); border-radius: 12px; display: grid; place-items: center; padding: 0 18px; text-align: center; font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+    .seal-slot strong { display: block; font-size: 14px; color: #fff; letter-spacing: .6px; margin-bottom: 4px; }
 
     /* FOOTER */
     footer { background: rgba(6,13,31,.92); border-top: 1px solid rgba(255,255,255,.06); padding: 54px 5% 32px; margin-top: 40px; }
@@ -108,7 +109,7 @@
     .ft-brand p { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; max-width: 320px; margin-top: 12px; }
     .ft-legal { max-width: var(--max); margin: 26px auto 0; display: flex; align-items: center; gap: 22px; }
     .vigilado { flex-shrink: 0; }
-    .vigilado img { height: 58px; width: auto; opacity: .95; transition: opacity .2s; }
+    .vigilado img { height: 88px; width: auto; opacity: .95; transition: opacity .2s; }
     .vigilado:hover img { opacity: 1; }
     .ft-legal-note { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; max-width: 560px; }
     .ft-bottom { max-width: var(--max); margin: 24px auto 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; color: var(--text-dim); flex-wrap: wrap; }
@@ -121,7 +122,7 @@
       .two { grid-template-columns: 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       .ft-legal { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .vigilado img { height: 50px; }
+      .vigilado img { height: 68px; }
       .ft-bottom { flex-direction: column; text-align: center; }
       .seals { gap: 22px; }
     }
@@ -218,9 +219,9 @@
         <img src="assets/vigilado-supertransporte-blanco.png" alt="Vigilado Supertransporte">
         <small>Superintendencia de Transporte</small>
       </div>
-      <!-- ONAC: reemplazar el slot por el símbolo de acreditado oficial (con código de acreditación) emitido por ONAC según RAC 3.0-03 -->
+      <!-- ONAC: reemplazar el slot por el símbolo de acreditado oficial emitido por ONAC según RAC 3.0-03, conservando el código de acreditación 10-OIN-076-001 -->
       <div class="seal">
-        <div class="seal-slot">Símbolo de acreditación ONAC<br>(pendiente: artwork oficial)</div>
+        <div class="seal-slot"><strong>10-OIN-076-001</strong>Símbolo de acreditación ONAC<br>(pendiente: artwork oficial)</div>
         <small>Organismo de inspección acreditado</small>
       </div>
     </div>
@@ -242,7 +243,7 @@
   </div>
   <div class="ft-legal">
     <a href="https://www.supertransporte.gov.co/" target="_blank" rel="noopener" class="vigilado" aria-label="Vigilado Superintendencia de Transporte de Colombia">
-      <img src="assets/vigilado-supertransporte-blanco.png" alt="Vigilado Supertransporte" width="180" height="104" loading="lazy">
+      <img src="assets/vigilado-supertransporte-blanco.png" alt="Vigilado Supertransporte" width="180" height="104" loading="lazy" style="image-rendering:-webkit-optimize-contrast;">
     </a>
     <p class="ft-legal-note">CENTRO DE DIAGNOSTICO AUTOMOTOR CHECKAR S.A.S. es una entidad vigilada por la Superintendencia de Transporte de Colombia.</p>
   </div>
