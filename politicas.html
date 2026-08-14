@@ -99,8 +99,9 @@
     .seal { display: flex; flex-direction: column; gap: 10px; }
     .seal img { height: 92px; width: auto; opacity: .96; }
     .seal small { font-size: 11px; color: var(--text-dim); letter-spacing: .4px; text-transform: uppercase; }
-    .seal-slot { height: 92px; min-width: 210px; border: 1px dashed rgba(255,255,255,.22); border-radius: 12px; display: grid; place-items: center; padding: 0 18px; text-align: center; font-size: 12px; color: var(--text-dim); line-height: 1.4; }
-    .seal-slot strong { display: block; font-size: 14px; color: #fff; letter-spacing: .6px; margin-bottom: 4px; }
+    .seal-onac { height: 92px; display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 12px; padding: 10px 20px; }
+    .seal-onac img { height: 54px; width: auto; display: block; }
+    .seal-onac-code { font-size: 13px; font-weight: 800; letter-spacing: .3px; color: #1c2b6b; white-space: nowrap; }
 
     /* FOOTER */
     footer { background: rgba(6,13,31,.92); border-top: 1px solid rgba(255,255,255,.06); padding: 54px 5% 32px; margin-top: 40px; }
@@ -219,9 +220,11 @@
         <img src="assets/vigilado-supertransporte-blanco.png" alt="Vigilado Supertransporte">
         <small>Superintendencia de Transporte</small>
       </div>
-      <!-- ONAC: reemplazar el slot por el símbolo de acreditado oficial emitido por ONAC según RAC 3.0-03, conservando el código de acreditación 10-OIN-076-001 -->
       <div class="seal">
-        <div class="seal-slot"><strong>10-OIN-076-001</strong>Símbolo de acreditación ONAC<br>(pendiente: artwork oficial)</div>
+        <div class="seal-onac">
+          <img src="assets/logo-onac.png" alt="ONAC — Organismo Nacional de Acreditación de Colombia">
+          <span class="seal-onac-code">10-OIN-076-001</span>
+        </div>
         <small>Organismo de inspección acreditado</small>
       </div>
     </div>
@@ -244,6 +247,9 @@
   <div class="ft-legal">
     <a href="https://www.supertransporte.gov.co/" target="_blank" rel="noopener" class="vigilado" aria-label="Vigilado Superintendencia de Transporte de Colombia">
       <img src="assets/vigilado-supertransporte-blanco.png" alt="Vigilado Supertransporte" width="180" height="104" loading="lazy" style="image-rendering:-webkit-optimize-contrast;">
+    </a>
+    <a href="https://www.mintransporte.gov.co/" target="_blank" rel="noopener" class="vigilado" aria-label="Ministerio de Transporte de Colombia">
+      <img src="assets/logo-mintransporte.png" alt="Ministerio de Transporte" width="180" height="130" loading="lazy">
     </a>
     <p class="ft-legal-note">CENTRO DE DIAGNOSTICO AUTOMOTOR CHECKAR S.A.S. es una entidad vigilada por la Superintendencia de Transporte de Colombia.</p>
   </div>
